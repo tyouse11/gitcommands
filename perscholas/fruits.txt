@@ -10,3 +10,4 @@ git branch - This allows us to list all of our branches (The current branch is m
 git branch <branch_name> - This allows us to create new branches in our repository
 git switch <branch_name> - This allows us to switch from one branch to another
 git merge <name of the branch you wish to merge to the main branch>
+git branch -m <current_name> <new_name> - allows us to change a branch name
