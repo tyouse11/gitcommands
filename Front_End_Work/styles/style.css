@@ -1,0 +1,105 @@
+/* DESCENDANT SELECTOR */
+/* div h1 {
+    color: red;
+} */
+
+/* DIRECT CHILDREN COMBINATOR 
+div > p {
+    color: red;
+    background-color: blue;
+} */
+
+/* ADJACENT SELECTOR 
+
+h1 + p + section {
+    background-color: red;
+} */
+
+/* GENERAL SIBLING SELECTOR
+span ~ p {
+    background-color: red;
+}
+
+span {
+    font-size: 18px;
+    font-weight: 800;
+    color: blueviolet;
+}*/
+
+/*h1, span, p, section, p(last p tag) - all siblings */
+
+/*.red-text {
+    color: red;
+ }*/
+ 
+
+ /*#mySection {
+    font-weight: bold;
+ }*/
+
+ /*a:hover {
+    background-color: gray;
+ }
+
+ a:link {
+    color: orangered;
+ }
+
+ a:visited {
+    color: green;
+ }
+
+ li:nth-child(3){
+    background-color: brown;
+ }
+
+ p::first-letter{
+    font-weight: bold;
+    color: blue;
+ }
+
+ h2 ::after {
+    content: "heading";
+    display: inline-block;
+    margin-left: 20px;
+    background-color: #ccc;
+ }*/
+
+ td, th {
+    border: 1px solid red;
+
+
+ }
+
+ /* table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+ } */
+
+ table {
+   width: 200px;
+   height: 300px;
+   text-align: center;
+   border: 5px solid greenyellow;
+ }
+
+ td:hover {
+   background-color: steelblue;
+   color: white;
+ }
+
+ /*.logo {
+    visibility: hidden;
+    display: block;
+    display: inline;
+ }*/
+
+ ul {
+    list-style: none;
+ }
+
+ /* li { 
+    text-decoration: line-through;
+ }*/
+ 

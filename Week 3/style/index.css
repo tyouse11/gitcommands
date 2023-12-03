@@ -1,0 +1,8 @@
+h1 {
+    font-family: 'Bungee Spice';
+}
+
+.imgContainer {
+    height: 500px;
+    background-image: center url('rain.jpg');
+}

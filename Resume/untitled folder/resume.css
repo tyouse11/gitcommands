@@ -1,0 +1,94 @@
+.main_container{
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    /* align-content: space-evenly; */
+    /* justify-content: space-evenly; */
+    background-color: black; 
+}
+
+#section1 {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgba(23, 23, 23, 0.968);
+    border-bottom: 1px solid rgb(105, 105, 105);
+    height: 35%;
+    width: 90%;
+    margin-top: 2rem;
+    margin-left: 2em;
+    width: 90%;
+}
+
+.parent-boxes {
+    display: flex;
+    justify-content: space-evenly;
+    height: 70%;
+    width: 100%;
+}
+
+#box1 {
+    display: flex;
+    background-color: rgba(23, 23, 23, 0.968);
+    /* height: 60%; */
+    width: 60%;
+}
+
+.img-container img {
+    height: 50%;
+    width: 50%;
+    padding: 10%;
+    justify-content: flex-start;
+}
+
+.intro-info {
+    color: beige;
+    justify-content: flex-end;
+}
+
+
+#box2 {
+    background-color: rgba(23, 23, 23, 0.968);
+    color: lightgray;
+    justify-content: flex-end;
+    padding: 2%;
+    width: auto;
+}
+
+span {
+    font-weight: bold;
+    color: white;
+}
+
+#box3 {
+    background-color: rgba(23, 23, 23, 0.968);
+    color: lightgray;
+    height: fit-content;
+    width: auto;
+    padding: 2%;
+}
+
+.bottom {
+    display: flex;
+    height: auto;
+    width: 95%;
+    background-color: rgba(23, 23, 23, 0.968);
+}
+
+#title {
+    color: white;
+}
+
+#section2 {
+    margin-left: 2em;
+    width: 70%;
+    padding-left: 2%;
+    color: darkgrey;
+}
+
+#section3 {
+    color: darkgray;
+    padding: 2%;
+    width: 30%;
+    justify-content: flex-end;
+}

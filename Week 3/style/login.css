@@ -1,0 +1,47 @@
+img {
+    width: 50px;
+}
+
+p {
+    text-align: center;
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+#container {
+    border: 1px solid black;
+    width: fit-content;
+    margin: auto;
+    padding: 50px;
+    background-color: lightgrey;
+    text-align: center;
+    box-shadow: 5px 5px 7px gray;
+}
+
+.textField {
+    padding: 5px;
+}
+
+a {
+    color: orange;
+    text-decoration: none;
+}
+
+input {
+    text-align: center;
+    background-color: rgb(227, 238, 238);
+    border: none;
+    padding: 7px;
+}
+
+button {
+    background-color: rgb(133, 207, 232);
+    border: none;
+    width: 100%;
+    padding: 4%;
+    color: white;
+    font-weight: bold;
+}
+
+
+
