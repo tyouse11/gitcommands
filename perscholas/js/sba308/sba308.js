@@ -76,8 +76,8 @@ const CourseInfo = {
     }
   ]
 
-function getLearnerData (course, ag, submissions) {
-    // Validate if AssignmentGroup belongs to its Course
+// Function to validate if AssignmentGroup belongs to its Course
+function validateCourseAssignmentMatch(course, ag) {
     try{
         if (ag.course_id !== course.id) {
             throw new Error ('Invalid input: AssignmentGroup does not match Course')
@@ -85,78 +85,78 @@ function getLearnerData (course, ag, submissions) {
     } catch (error) {
         console.error('An error occurred:', error.message)
     }
-
+  }
+  
+  // Function to create assignments object from AssignmentGroup
+  function createAssignmentsObject(ag) {
     const assignments = {};
-        ag.assignments.forEach(assignment => {
-        assignments[assignment.id] = assignment;
-        });
-
-
-    const learnersData = {}
   
-    // Process learner submissions
-    submissions.forEach((submission) => {
-      const assignment = assignments[submission.assignment_id]
-      if (!assignment) {
-        return
-      }
+    for (const index in ag.assignments) {
+      const assignment = ag.assignments[index];
+      assignments[assignment.id] = assignment;
+    }
   
-      // Check if assignment is already in the learner's data
+    return assignments;
+  }  
+
+  // Function to process learner submissions
+  function processSubmissions(assignments, submissions) {
+    const learnersData = {};
+  
+    submissions.forEach(submission => {
+      const assignment = assignments[submission.assignment_id];
+      if (!assignment) return;
+  
       if (!learnersData[submission.learner_id]) {
         learnersData[submission.learner_id] = {
           id: submission.learner_id,
           totalWeightedScore: 0,
           totalWeight: 0,
           scores: {}
-        }
+        };
       }
   
-      const learner = learnersData[submission.learner_id]
-      //console.log(learner)
-      const dueDate = new Date(assignment.due_at)
-      const submittedDate = new Date(submission.submission.submitted_at)
+      const learner = learnersData[submission.learner_id];
+      const dueDate = new Date(assignment.due_at);
+      const submittedDate = new Date(submission.submission.submitted_at);
   
-      // Calculate score considering late submission
-      let pointsPossible
-      if (assignment.points_possible !== 0) {
-        pointsPossible = assignment.points_possible
-      } else {
-        pointsPossible = 1
-      }
-
-      let lateSubmissionPenalty
-        if (submittedDate > dueDate) {
-            lateSubmissionPenalty = pointsPossible * 0.1
-        } else {
-        lateSubmissionPenalty = 0
-        }
-        let adjustedScore = submission.submission.score - lateSubmissionPenalty;
-        if (adjustedScore < 0) {
-          adjustedScore = 0;
-        }
+      let pointsPossible = assignment.points_possible !== 0 ? assignment.points_possible : 1;
+      let lateSubmissionPenalty = submittedDate > dueDate ? pointsPossible * 0.1 : 0;
+      let adjustedScore = submission.submission.score - lateSubmissionPenalty;
+      adjustedScore = adjustedScore < 0 ? 0 : adjustedScore;
   
-      // Update learner's total weighted score and total weight
-      learner.totalWeightedScore += (adjustedScore / pointsPossible) * pointsPossible
-      learner.totalWeight += pointsPossible
+      learner.totalWeightedScore += (adjustedScore / pointsPossible) * pointsPossible;
+      learner.totalWeight += pointsPossible;
+      learner.scores[submission.assignment_id] = adjustedScore / pointsPossible;
+    });
   
-      // Store assignment score for the learner
-      learner.scores[submission.assignment_id] = adjustedScore / pointsPossible
-    })
+    return learnersData;
+  }
   
-    // // Calculate averages and format output
+  // Function to calculate averages and format output
+  function calculateAverages(learnersData) {
     const result = Object.entries(learnersData).map(([learnerId, learner]) => {
-    const avg = (learner.totalWeightedScore / learner.totalWeight) * 100 || 0
-    
-    const learnerData = { id: learner.id, avg }
-        for (const [assignmentId, score] of Object.entries(learner.scores)) {
-          learnerData[assignmentId] = score * 100; // Convert to percentage
-        }
-        return learnerData
-      });
-    
+      const avg = (learner.totalWeightedScore / learner.totalWeight) * 100 || 0;
+      const learnerData = { id: learner.id, avg };
+  
+      for (const [assignmentId, score] of Object.entries(learner.scores)) {
+        learnerData[assignmentId] = score * 100; // Convert to percentage
+      }
+  
+      return learnerData;
+    });
+  
     return result;
-    }
+  }
   
-  const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions)
+  // Main function using the smaller functions
+  function getLearnerData(course, ag, submissions) {
+    validateCourseAssignmentMatch(course, ag);
+    const assignments = createAssignmentsObject(ag);
+    const learnersData = processSubmissions(assignments, submissions);
+    return calculateAverages(learnersData);
+  }
   
-  console.log(result)
+  const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
+  console.log(result);
+  
