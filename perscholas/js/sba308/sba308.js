@@ -72,8 +72,16 @@ const CourseInfo = {
       submission: {
         submitted_at: "2023-03-07",
         score: 140
+       }
+    },
+    {
+        learner_id: 145,
+        assignment_id: 2,
+        submission: {
+          submitted_at: "2023-03-07",
+          score: 120
+        }
       }
-    }
   ]
 
 // Function to validate if AssignmentGroup belongs to its Course
