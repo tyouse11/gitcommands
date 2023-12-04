@@ -88,16 +88,16 @@ function validateCourseAssignmentMatch(course, ag) {
   }
   
   // Function to create assignments object from AssignmentGroup
-  function createAssignmentsObject(ag) {
-    const assignments = {}
-  
-    for (const index in ag.assignments) {
-      const assignment = ag.assignments[index]
-      assignments[assignment.id] = assignment
-    }
-  
+    function createAssignmentsObject(ag) {
+        const assignments = {}
+    
+        for (let i = 0; i < ag.assignments.length; i++) {
+        const assignment = ag.assignments[i]
+        assignments[assignment.id] = assignment
+        }
+
     return assignments
-  }  
+  }
 
   // Function to process learner submissions
   function processSubmissions(assignments, submissions) {
@@ -144,11 +144,11 @@ function validateCourseAssignmentMatch(course, ag) {
     learner.scores[submission.assignment_id] = adjustedScore / pointsPossible
           
 })  
+
     return learnersData
   }
   
-  // Function to calculate averages and format output
-  
+// Function to calculate averages and format output 
 function calculateAverages(learnersData) {
     const result = [];
   
@@ -166,6 +166,7 @@ function calculateAverages(learnersData) {
   
       result.push(learnerData);
     } 
+
     return result;
   }
 
@@ -174,6 +175,7 @@ function calculateAverages(learnersData) {
     validateCourseAssignmentMatch(course, ag)
     const assignments = createAssignmentsObject(ag)
     const learnersData = processSubmissions(assignments, submissions)
+    
     return calculateAverages(learnersData)
   }
   
