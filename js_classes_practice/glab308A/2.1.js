@@ -50,17 +50,75 @@ class Character {
 }
 
 
-// Re-create Robin using the Character class
-const robin = new Character("Robin");
-robin.inventory = ["sword", "potion", "artifact"];
-robin.companion = new Character("Leo");
-robin.companion.type = "Cat";
-robin.companion.companion = new Character("Frank");
-robin.companion.companion.type = "Flea";
-robin.companion.companion.inventory = ["small hat", "sunglasses"];
+// // Re-create Robin using the Character class
+// const robin = new Character("Robin");
+// robin.inventory = ["sword", "potion", "artifact"];
+// robin.companion = new Character("Leo");
+// robin.companion.type = "Cat";
+// robin.companion.companion = new Character("Frank");
+// robin.companion.companion.type = "Flea";
+// robin.companion.companion.inventory = ["small hat", "sunglasses"];
 
-// Companions rolling the dice
-robin.companion.roll()
-robin.companion.companion.roll()
+// // Companions rolling the dice
+// robin.companion.roll()
+// robin.companion.companion.roll()
 
+
+//Part 3
+
+// Create an Adventurer class.
+
+class Adventurer extends Character {
+    constructor (name, role) {
+    super(name);
+    // Adventurers have specialized roles.
+    this.role = role;
+    // Every adventurer starts with a bed and 50 gold coins.
+    this.inventory.push("bedroll", "50 gold coins");
+    }
+    // Adventurers have the ability to scout ahead of them.
+    scout () {
+    console.log(`${this.name} is scouting ahead...`);
+    super.roll();
+    }
+   }
+
+   // Create a Companion class with properties and methods specific to the companions
+class Companion extends Adventurer {
+    constructor (name, type) {
+        super(name)
+        this.type = type
+        this.belongings = []
+    }
+    carry(item) {
+        this.belongings.push(item)
+        console.log(`${this.name} is carrying ${item}.`)
+    }
+}
+
+
+// Change the declarion of Robind and the companions to use the new Adventurer and companion classes
+
+const robin = new Adventurer("Robin", "Ranger")
+robin.inventory = ["sword", "potion", "artifact"]
+
+const leo = new Companion("Leo", "Cat")
+
+const frank = new Companion("Frank", "Flea")
+frank.carry("small hat")
+frank.carry("sunglasses")
+
+robin.companion = leo
+leo.companion = frank
+
+// See the objects
+console.log(robin)
+console.log(leo)
+console.log(frank)
+
+// Verify that Leo is a companion of Robin's
+console.log(robin.companion === leo)
+
+// Verify that Frank is a companion of Leo
+console.log(leo.companion === frank)
 
