@@ -31,12 +31,15 @@ adventurer.inventory.forEach(item => {
     console.log(item)
 })
 
-//Part 2
+//Part 2: Class Fantasy
 
 // Create a Character class which defines generic character entities...name, health(max 100), and inventory
 // Character Class including a construction function that allows us to create new characters with whater name we would like
 
 class Character {
+    // static max_health property 
+    static max_health = 100
+
     constructor(name) {
         this.name = name
         this.health = 100
@@ -64,14 +67,20 @@ class Character {
 // robin.companion.companion.roll()
 
 
-//Part 3
+//Part 3: Class Features
 
 // Create an Adventurer class.
 
 class Adventurer extends Character {
+    static roles = ["Fighter", "Healer", "Wizard", "Ranger"]
+
     constructor (name, role) {
     super(name);
     // Adventurers have specialized roles.
+    // Check to ensure that a given role matches one of the 'roles' array values
+    if (!Adventurer.roles.includes(role)) {
+        throw new Error(`Invalid role. Available roles: ${Adventurer.roles.join(", ")}`)
+    }
     this.role = role;
     // Every adventurer starts with a bed and 50 gold coins.
     this.inventory.push("bedroll", "50 gold coins");
@@ -84,7 +93,7 @@ class Adventurer extends Character {
    }
 
    // Create a Companion class with properties and methods specific to the companions
-class Companion extends Adventurer {
+class Companion extends Character {
     constructor (name, type) {
         super(name)
         this.type = type
@@ -97,7 +106,7 @@ class Companion extends Adventurer {
 }
 
 
-// Change the declarion of Robind and the companions to use the new Adventurer and companion classes
+// Change the declarion of Robind and the companions to use the new Adventurer and Companion classes
 
 const robin = new Adventurer("Robin", "Ranger")
 robin.inventory = ["sword", "potion", "artifact"]
@@ -121,4 +130,8 @@ console.log(robin.companion === leo)
 
 // Verify that Frank is a companion of Leo
 console.log(leo.companion === frank)
+
+
+//Part 4: Class Uniforms - done in Character and Adventurer classes
+
 
