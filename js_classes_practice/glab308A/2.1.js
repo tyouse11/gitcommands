@@ -90,7 +90,47 @@ class Adventurer extends Character {
     console.log(`${this.name} is scouting ahead...`);
     super.roll();
     }
+
+    // Part 6
+    // Create a duel() method that accepts an Adventurer as a parameter
+    // Use the roll() functionality to create opposing rolls for each adventure
+    // Repeat the process until one of the two adventurers reaches 50 health
+    duel (opponent) {
+        while (this.health > 50 && opponent.health > 50) {
+            this.roll()
+            opponent.roll()
+
+            const playerRoll = Math.floor(Math.random() * 20) + 1 + this.health
+            const opponentRoll = Math.floor(Math.random() *  20) + 1 + opponent.health
+
+            console.log(`${this.name} rolled a ${playerRoll}`)
+            console.log(`${opponent.name} rolled a ${opponentRoll}`)
+
+            // Subtract 1 from the adventurer with the lower roll
+            if (playerRoll > opponentRoll) {
+                opponent.health -= 1
+            } else if (playerRoll < opponentRoll) {
+                this.health -= 1
+            }
+
+            // Log the restults of this "round" of the duel including the rolls and current health values
+            console.log(`${this.name}'s health: ${this.health}`)
+            console.log(`${opponent.name}'s health: ${opponent.health}`)
+        }
+
+        // Log the winner of the duel: the adventurer still above 50 health
+        if (this.health > 50) {
+            console.log(`${this.name} wins the duel!`)
+        } else {
+            console.log(`${opponent.name} wins the duel!`)
+        }
+    }
    }
+
+   const adventurer1 = new Adventurer("Adventurer1", "Fighter")
+   const adventurer2 = new Adventurer("Adventurer2", "Wizard")
+
+   adventurer1.duel(adventurer2)
 
    // Create a Companion class with properties and methods specific to the companions
 class Companion extends Character {
