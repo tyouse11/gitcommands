@@ -108,8 +108,8 @@ class Companion extends Character {
 
 // Change the declarion of Robind and the companions to use the new Adventurer and Companion classes
 
-const robin = new Adventurer("Robin", "Ranger")
-robin.inventory = ["sword", "potion", "artifact"]
+//const robin = new Adventurer("Robin", "Ranger")
+//robin.inventory = ["sword", "potion", "artifact"]
 
 const leo = new Companion("Leo", "Cat")
 
@@ -117,21 +117,42 @@ const frank = new Companion("Frank", "Flea")
 frank.carry("small hat")
 frank.carry("sunglasses")
 
-robin.companion = leo
+//robin.companion = leo
 leo.companion = frank
 
 // See the objects
-console.log(robin)
+//console.log(robin)
 console.log(leo)
 console.log(frank)
 
 // Verify that Leo is a companion of Robin's
-console.log(robin.companion === leo)
+//console.log(robin.companion === leo)
 
 // Verify that Frank is a companion of Leo
-console.log(leo.companion === frank)
+//1`console.log(leo.companion === frank)
 
 
-//Part 4: Class Uniforms - done in Character and Adventurer classes
+// Part 4: Class Uniforms - done in Character and Adventurer classes
 
 
+// Part 5: Gather your party
+
+class AdventurerFactory {
+    constructor (role) {      
+    this.role = role;
+    this.adventurers = [];
+    }
+    generate (name) {
+        const newAdventurer = new Adventurer(name, this.role);
+        this.adventurers.push(newAdventurer);
+    }
+    findByIndex (index) {
+        return this.adventurers[index];
+    }
+    findByName (name) {
+        return this.adventurers.find((a) => a.name === name);
+    }
+   }
+   
+   const healers = new AdventurerFactory("Healer");
+   const robin = healers.generate("Robin");
